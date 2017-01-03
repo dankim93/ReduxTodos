@@ -39,6 +39,16 @@ class TodoForm extends React.Component {
             onChange={this.update('title')}
             />
         </label>
+
+        <label>Body:
+          <input
+            className="input"
+            ref="body"
+            value={this.state.body}
+            onChange={this.update('body')}
+          />
+        </label>
+        <button className="create-button">Create Magic!</button>
       </form>
     );
   }
