@@ -32,9 +32,10 @@ const todosReducer = (state = initialState, action) => {
       return newState;
     case REMOVE_TODO:
       // newState = {};
+      console.log("in reducer");
       delete newState[action.todo.id];
       return newState;
-      
+
     default:
       return state;
   }
