@@ -23846,7 +23846,7 @@
 	          this.props.todos.map(function (todo) {
 	            return (
 	              // <li key={todo.id}>{todo.title}</li>
-	              _react2.default.createElement(_todo_list_item2.default, { todo: todo, removeTodo: _this2.props.removeTodo, key: todo.id })
+	              _react2.default.createElement(_todo_list_item2.default, { todo: todo, receiveTodo: _this2.props.receiveTodo, removeTodo: _this2.props.removeTodo, key: todo.id })
 	            );
 	          })
 	        ),
@@ -23870,8 +23870,6 @@
 	  value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -23886,67 +23884,45 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var TodoListItem = function TodoListItem(_ref) {
+	  var todo = _ref.todo,
+	      updateTodo = _ref.updateTodo,
+	      receiveTodo = _ref.receiveTodo,
+	      removeTodo = _ref.removeTodo;
+	  var title = todo.title,
+	      done = todo.done;
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  return _react2.default.createElement(
+	    'li',
+	    null,
+	    todo.title,
+	    _react2.default.createElement(
+	      'button',
+	      {
+	        onClick: function onClick() {
+	          return removeTodo(todo);
+	        },
+	        className: 'delete-button'
+	      },
+	      'Delete Magic :( '
+	    ),
+	    _react2.default.createElement(
+	      'button',
+	      {
+	        className: done ? "Done" : "Undone",
+	        onClick: function onClick() {
+	          return toggleTodo(todo, done, receiveTodo);
+	        } },
+	      done ? "Undo" : "Done"
+	    )
+	  );
+	};
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var toggleTodo = function toggleTodo(todo, done, receiveTodo) {
+	  var toggledTodo = (0, _merge2.default)({}, todo, { done: !done });
 	
-	var TodoListItem = function (_React$Component) {
-	  _inherits(TodoListItem, _React$Component);
-	
-	  function TodoListItem() {
-	    _classCallCheck(this, TodoListItem);
-	
-	    return _possibleConstructorReturn(this, (TodoListItem.__proto__ || Object.getPrototypeOf(TodoListItem)).apply(this, arguments));
-	  }
-	
-	  _createClass(TodoListItem, [{
-	    key: 'toggleTodo',
-	    value: function toggleTodo(e) {
-	      e.preventDefault();
-	      var toggledTodo = (0, _merge2.default)({}, this.props.todo, { done: !this.props.todo.done });
-	      this.props.receiveTodo(toggledTodo);
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      var _this2 = this;
-	
-	      // debugger;
-	      var _props = this.props,
-	          todo = _props.todo,
-	          updateTodo = _props.updateTodo;
-	      var title = todo.title,
-	          done = todo.done;
-	
-	      return _react2.default.createElement(
-	        'li',
-	        null,
-	        this.props.todo.title,
-	        _react2.default.createElement(
-	          'button',
-	          {
-	            onClick: function onClick() {
-	              return _this2.props.removeTodo(_this2.props.todo);
-	            },
-	            className: 'delete-button'
-	          },
-	          'Delete Magic :( '
-	        ),
-	        _react2.default.createElement(
-	          'button',
-	          {
-	            className: done ? "Done" : "Undone",
-	            onClick: this.toggleTodo },
-	          done ? "Undo" : "Done"
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return TodoListItem;
-	}(_react2.default.Component);
+	  receiveTodo(toggledTodo);
+	};
 	
 	exports.default = TodoListItem;
 
