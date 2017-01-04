@@ -75,7 +75,7 @@
 	
 	document.addEventListener("DOMContentLoaded", function () {
 	  window.store = _store2.default;
-	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: _store2.default }), document.getElementById('root'));
+	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: _store2.default }), document.getElementById('content'));
 	});
 
 /***/ },
